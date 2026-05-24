@@ -39,59 +39,75 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    if (submitting) return; // Baar baar click karne se freeze hone se bachaye ga
+
+    const currentForm = e.currentTarget;
+    const fd = new FormData(currentForm);
     const raw = Object.fromEntries(fd.entries()) as Record<string, string>;
     raw.dial = dial;
+
     const parsed = schema.safeParse(raw);
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Please check your inputs.");
       return;
     }
+
     const d = parsed.data;
     setSubmitting(true);
-    const { error } = await supabase.from("inquiries").insert({
-      full_name: d.full_name,
-      company_name: d.company_name || null,
-      email: d.email,
-      phone: d.phone ? `${d.dial} ${d.phone}` : null,
-      country: d.country,
-      product_category: d.product_category || null,
-      product_requirement: d.product_requirement || null,
-      quantity: d.quantity || null,
-      shipping_preference: d.shipping_preference || null,
-      budget_range: d.budget_range || null,
-      message: d.message || null,
-      source,
-    });
-    setSubmitting(false);
-    if (error) {
-      toast.error("Couldn't submit. Please try again.");
-      return;
+
+    try {
+      // Direct client-safe Supabase call using try-catch blocks
+      const { error } = await supabase.from("inquiries").insert({
+        full_name: d.full_name,
+        company_name: d.company_name || null,
+        email: d.email,
+        phone: d.phone ? `${d.dial} ${d.phone}` : null,
+        country: d.country,
+        product_category: d.product_category || null,
+        product_requirement: d.product_requirement || null,
+        quantity: d.quantity || null,
+        shipping_preference: d.shipping_preference || null,
+        budget_range: d.budget_range || null,
+        message: d.message || null,
+        source,
+      });
+
+      if (error) {
+        console.error("Supabase Insertion Error:", error);
+        toast.error(`Submission failed: ${error.message || "Please try again."}`);
+      } else {
+        toast.success("Inquiry received — our team will respond within 24 hours.");
+        currentForm.reset();
+      }
+    } catch (err: any) {
+      console.error("Form Crash Caught:", err);
+      toast.error("Network or environment error occurred. Please try again.");
+    } finally {
+      // Yeh har haal mein chalega, taake website kabhi hang ya lock na rahe
+      setSubmitting(false);
     }
-    toast.success("Inquiry received — our team will respond within 24 hours.");
-    (e.target as HTMLFormElement).reset();
   };
 
   const inputCls =
-    "w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none transition-colors focus:border-gold focus:ring-2 focus:ring-gold/20";
+    "w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none transition-colors focus:border-gold focus:ring-2 focus:ring-gold/20 disabled:opacity-50";
 
   return (
     <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
-      <Field label="Full Name *"><input name="full_name" required className={inputCls} placeholder="John Doe" /></Field>
-      <Field label="Company Name"><input name="company_name" className={inputCls} placeholder="Acme Imports Ltd." /></Field>
-      <Field label="Email Address *"><input type="email" name="email" required className={inputCls} placeholder="you@company.com" /></Field>
+      <Field label="Full Name *"><input name="full_name" required disabled={submitting} className={inputCls} placeholder="John Doe" /></Field>
+      <Field label="Company Name"><input name="company_name" disabled={submitting} className={inputCls} placeholder="Acme Imports Ltd." /></Field>
+      <Field label="Email Address *"><input type="email" name="email" required disabled={submitting} className={inputCls} placeholder="you@company.com" /></Field>
       <Field label="Phone">
         <div className="flex gap-2">
-          <select value={dial} onChange={(e) => setDial(e.target.value)} className={inputCls + " w-32"}>
+          <select value={dial} disabled={submitting} onChange={(e) => setDial(e.target.value)} className={inputCls + " w-32"}>
             {COUNTRIES.map((c) => (
               <option key={c.code} value={c.dial}>{c.flag} {c.dial}</option>
             ))}
           </select>
-          <input name="phone" className={inputCls} placeholder="300 0000000" />
+          <input name="phone" disabled={submitting} className={inputCls} placeholder="300 0000000" />
         </div>
       </Field>
       <Field label="Country *">
-        <select name="country" required defaultValue="" className={inputCls}>
+        <select name="country" required disabled={submitting} defaultValue="" className={inputCls}>
           <option value="" disabled>Select your country</option>
           {COUNTRIES.map((c) => (
             <option key={c.code} value={c.name}>{c.flag} {c.name}</option>
@@ -99,32 +115,32 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
         </select>
       </Field>
       <Field label="Product Category">
-        <select name="product_category" defaultValue="" className={inputCls}>
+        <select name="product_category" disabled={submitting} defaultValue="" className={inputCls}>
           <option value="">Select a category</option>
           {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
         </select>
       </Field>
       <Field label="Product Requirement" className="sm:col-span-2">
-        <input name="product_requirement" className={inputCls} placeholder="e.g. 100% cotton t-shirts, 180 GSM" />
+        <input name="product_requirement" disabled={submitting} className={inputCls} placeholder="e.g. 100% cotton t-shirts, 180 GSM" />
       </Field>
-      <Field label="Quantity"><input name="quantity" className={inputCls} placeholder="e.g. 10,000 pcs" /></Field>
+      <Field label="Quantity"><input name="quantity" disabled={submitting} className={inputCls} placeholder="e.g. 10,000 pcs" /></Field>
       <Field label="Shipping Preference">
-        <select name="shipping_preference" defaultValue="" className={inputCls}>
+        <select name="shipping_preference" disabled={submitting} defaultValue="" className={inputCls}>
           <option value="">Select option</option>
           {SHIPPING.map((s) => <option key={s}>{s}</option>)}
         </select>
       </Field>
       <Field label="Budget Range">
-        <select name="budget_range" defaultValue="" className={inputCls}>
+        <select name="budget_range" disabled={submitting} defaultValue="" className={inputCls}>
           <option value="">Select budget</option>
           {BUDGETS.map((b) => <option key={b}>{b}</option>)}
         </select>
       </Field>
       <Field label="Attachment (optional)">
-        <input type="file" name="file" className={inputCls + " file:mr-3 file:rounded-md file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:text-foreground"} />
+        <input type="file" name="file" disabled={submitting} className={inputCls + " file:mr-3 file:rounded-md file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:text-foreground"} />
       </Field>
       <Field label="Message" className="sm:col-span-2">
-        <textarea name="message" rows={5} className={inputCls} placeholder="Tell us about your project, target timelines, and any specifications…" />
+        <textarea name="message" disabled={submitting} rows={5} className={inputCls} placeholder="Tell us about your project, target timelines, and any specifications…" />
       </Field>
       <div className="sm:col-span-2 mt-2 flex items-center justify-between gap-4 flex-wrap">
         <p className="text-xs text-muted-foreground">Your information is encrypted and never shared with third parties.</p>
