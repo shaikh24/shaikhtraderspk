@@ -2,8 +2,19 @@ import { useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { COUNTRIES } from "@/lib/countries";
 import { Button } from "@/components/ui/button";
+
+// Kuch basic standard countries ka local backup array taake crash na ho
+const BACKUP_COUNTRIES = [
+  { code: "PK", name: "Pakistan", dial: "+92", flag: "🇵🇰" },
+  { code: "US", name: "United States", dial: "+1", flag: "🇺🇸" },
+  { code: "GB", name: "United Kingdom", dial: "+44", flag: "🇬🇧" },
+  { code: "AE", name: "United Arab Emirates", dial: "+971", flag: "🇦🇪" },
+  { code: "SA", name: "Saudi Arabia", dial: "+966", flag: "🇸🇦" },
+  { code: "CA", name: "Canada", dial: "+1", flag: "🇨🇦" },
+  { code: "AU", name: "Australia", dial: "+61", flag: "🇦🇺" },
+  { code: "DE", name: "Germany", dial: "+49", flag: "🇩🇪" },
+];
 
 const schema = z.object({
   full_name: z.string().trim().min(2, "Please enter your full name").max(120),
@@ -39,10 +50,14 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (submitting) return; // Baar baar click karne se freeze hone se bachaye ga
+    if (submitting) return;
 
     const currentForm = e.currentTarget;
     const fd = new FormData(currentForm);
+    
+    // File remove kar rahe hain raw data se taake JSON insertion crash na ho
+    fd.delete("file"); 
+    
     const raw = Object.fromEntries(fd.entries()) as Record<string, string>;
     raw.dial = dial;
 
@@ -56,7 +71,6 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
     setSubmitting(true);
 
     try {
-      // Direct client-safe Supabase call using try-catch blocks
       const { error } = await supabase.from("inquiries").insert({
         full_name: d.full_name,
         company_name: d.company_name || null,
@@ -73,17 +87,16 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
       });
 
       if (error) {
-        console.error("Supabase Insertion Error:", error);
-        toast.error(`Submission failed: ${error.message || "Please try again."}`);
+        console.error("Database error:", error);
+        toast.error("Couldn't submit. Please check database connectivity.");
       } else {
         toast.success("Inquiry received — our team will respond within 24 hours.");
         currentForm.reset();
       }
-    } catch (err: any) {
-      console.error("Form Crash Caught:", err);
-      toast.error("Network or environment error occurred. Please try again.");
+    } catch (err) {
+      console.error("Caught Form Crash:", err);
+      toast.error("Form transmission error. Please try again.");
     } finally {
-      // Yeh har haal mein chalega, taake website kabhi hang ya lock na rahe
       setSubmitting(false);
     }
   };
@@ -96,52 +109,58 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
       <Field label="Full Name *"><input name="full_name" required disabled={submitting} className={inputCls} placeholder="John Doe" /></Field>
       <Field label="Company Name"><input name="company_name" disabled={submitting} className={inputCls} placeholder="Acme Imports Ltd." /></Field>
       <Field label="Email Address *"><input type="email" name="email" required disabled={submitting} className={inputCls} placeholder="you@company.com" /></Field>
+      
       <Field label="Phone">
         <div className="flex gap-2">
           <select value={dial} disabled={submitting} onChange={(e) => setDial(e.target.value)} className={inputCls + " w-32"}>
-            {COUNTRIES.map((c) => (
+            {BACKUP_COUNTRIES.map((c) => (
               <option key={c.code} value={c.dial}>{c.flag} {c.dial}</option>
             ))}
           </select>
           <input name="phone" disabled={submitting} className={inputCls} placeholder="300 0000000" />
         </div>
       </Field>
+
       <Field label="Country *">
         <select name="country" required disabled={submitting} defaultValue="" className={inputCls}>
           <option value="" disabled>Select your country</option>
-          {COUNTRIES.map((c) => (
+          {BACKUP_COUNTRIES.map((c) => (
             <option key={c.code} value={c.name}>{c.flag} {c.name}</option>
           ))}
         </select>
       </Field>
+
       <Field label="Product Category">
         <select name="product_category" disabled={submitting} defaultValue="" className={inputCls}>
           <option value="">Select a category</option>
           {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
         </select>
       </Field>
+      
       <Field label="Product Requirement" className="sm:col-span-2">
         <input name="product_requirement" disabled={submitting} className={inputCls} placeholder="e.g. 100% cotton t-shirts, 180 GSM" />
       </Field>
+      
       <Field label="Quantity"><input name="quantity" disabled={submitting} className={inputCls} placeholder="e.g. 10,000 pcs" /></Field>
+      
       <Field label="Shipping Preference">
         <select name="shipping_preference" disabled={submitting} defaultValue="" className={inputCls}>
           <option value="">Select option</option>
           {SHIPPING.map((s) => <option key={s}>{s}</option>)}
         </select>
       </Field>
+      
       <Field label="Budget Range">
         <select name="budget_range" disabled={submitting} defaultValue="" className={inputCls}>
           <option value="">Select budget</option>
           {BUDGETS.map((b) => <option key={b}>{b}</option>)}
         </select>
       </Field>
-      <Field label="Attachment (optional)">
-        <input type="file" name="file" disabled={submitting} className={inputCls + " file:mr-3 file:rounded-md file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:text-foreground"} />
-      </Field>
+      
       <Field label="Message" className="sm:col-span-2">
         <textarea name="message" disabled={submitting} rows={5} className={inputCls} placeholder="Tell us about your project, target timelines, and any specifications…" />
       </Field>
+      
       <div className="sm:col-span-2 mt-2 flex items-center justify-between gap-4 flex-wrap">
         <p className="text-xs text-muted-foreground">Your information is encrypted and never shared with third parties.</p>
         <Button type="submit" disabled={submitting} size="lg" className="rounded-full gradient-gold text-navy-deep hover:opacity-90 shadow-gold border-0">
@@ -159,4 +178,5 @@ function Field({ label, children, className }: { label: string; children: React.
       {children}
     </label>
   );
-}
+          }
+                                       
