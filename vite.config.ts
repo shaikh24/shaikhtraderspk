@@ -7,16 +7,5 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
   ],
-  resolve: {
-    alias: {
-      // Jab TanStack browser build ke waqt Node ka feature maange, to hum use ignore karwa dete hain
-      'node:async_hooks': 'unenv/runtime/mock/empty', 
-    },
-  },
-  build: {
-    rollupOptions: {
-      // Yeh ensure karega ke Rollup builds is external package ki wajah se na rukein
-      external: ['node:async_hooks'],
-    },
-  },
+  // Humne backend ko block karne wali saari lines (alias aur external) hata di hain
 })
