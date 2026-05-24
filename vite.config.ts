@@ -9,14 +9,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      // Yeh browser build ke waqt async_hooks ko khali safe object de dega taake crash na ho
-      'node:async_hooks': 'unenv/runtime/mock/empty',
-    },
-  },
-  build: {
-    rollupOptions: {
-      // Is se production build bina ruke successfully complete ho jayegi
-      external: [],
+      // Yeh inline code browser mein async_hooks ka crash hone se bachaaye ga
+      'node:async_hooks': 'data:text/javascript,export const AsyncLocalStorage = class { disable() {}; getStore() {}; run(store, cb) { return cb(); }; enterWith(store) {}; };',
     },
   },
 })
