@@ -1,12 +1,34 @@
 import { Link } from "@tanstack/react-router";
-import { Ship, Mail, Phone, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
+import { Ship, Mail, Phone, MapPin, Linkedin, Facebook, Instagram, ShieldCheck, BadgeCheck, Award, Container } from "lucide-react";
 import { SITE, NAV } from "@/lib/site";
 import { Newsletter } from "./Newsletter";
 
 export function Footer() {
   return (
-    <footer className="relative mt-24 text-primary-foreground" style={{ background: "var(--gradient-hero)" }}>
-      <div className="container-px mx-auto max-w-7xl py-16">
+    <footer className="relative mt-24 overflow-hidden text-primary-foreground" style={{ background: "var(--gradient-hero)" }}>
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid-luxury opacity-40" />
+      <div aria-hidden className="pointer-events-none absolute -top-32 left-1/3 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,oklch(0.78_0.13_85/0.18),transparent_60%)] blur-2xl" />
+      <div className="relative container-px mx-auto max-w-7xl pb-12 pt-16">
+        {/* Certifications row */}
+        <div className="mb-12 grid gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { icon: ShieldCheck, t: "ISO 9001", s: "Quality management aligned" },
+            { icon: BadgeCheck, t: "CE Compliant", s: "Surgical & medical lines" },
+            { icon: Award, t: "FBR Registered", s: "Pakistan customs verified" },
+            { icon: Container, t: "FCL & LCL", s: "Global door-to-door" },
+          ].map((c) => (
+            <div key={c.t} className="flex items-center gap-3">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl gradient-gold text-navy-deep">
+                <c.icon className="h-4 w-4" />
+              </span>
+              <div>
+                <div className="text-sm font-semibold text-white">{c.t}</div>
+                <div className="text-[11px] text-white/60">{c.s}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
         <div className="grid gap-12 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5">
@@ -56,7 +78,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
           <p>© {SITE.year} {SITE.name}. All rights reserved.</p>
           <div className="flex gap-5">
             <Link to="/privacy" className="hover:text-gold">Privacy Policy</Link>
