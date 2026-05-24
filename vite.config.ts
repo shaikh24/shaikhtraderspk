@@ -7,5 +7,16 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
   ],
-  // Humne backend ko block karne wali saari lines (alias aur external) hata di hain
+  resolve: {
+    alias: {
+      // Yeh browser build ke waqt async_hooks ko khali safe object de dega taake crash na ho
+      'node:async_hooks': 'unenv/runtime/mock/empty',
+    },
+  },
+  build: {
+    rollupOptions: {
+      // Is se production build bina ruke successfully complete ho jayegi
+      external: [],
+    },
+  },
 })
