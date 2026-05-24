@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import tailwindcss from '@tailwindcss/vite' // Yeh plugin humne import kiya
 
 export default defineConfig({
   plugins: [
     react(),
+    tailwindcss(), // Yeh line aapki website ki saari styling wapas le aayegi
     tsconfigPaths(),
   ],
   resolve: {
