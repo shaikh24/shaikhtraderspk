@@ -1,18 +1,18 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import tailwindcss from '@tailwindcss/vite' // Yeh plugin humne import kiya
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(), // Yeh line aapki website ki saari styling wapas le aayegi
+    tailwindcss(),
     tsconfigPaths(),
   ],
   resolve: {
     alias: {
-      // Yeh inline code browser mein async_hooks ka crash hone se bachaaye ga
-      'node:async_hooks': 'data:text/javascript,export const AsyncLocalStorage = class { disable() {}; getStore() {}; run(store, cb) { return cb(); }; enterWith(store) {}; };',
+      // Yeh perfect client-side memory storage mock hai jo typing ya re-rendering par website freeze nahi hone dega
+      'node:async_hooks': 'data:text/javascript,export const AsyncLocalStorage = class { constructor() { this.store = new Map(); } disable() { this.store.clear(); } getStore() { return this.currentStore; } run(store, cb, ...args) { const prev = this.currentStore; this.currentStore = store; try { return cb(...args); } finally { this.currentStore = prev; } } enterWith(store) { this.currentStore = store; } };',
     },
   },
 })
