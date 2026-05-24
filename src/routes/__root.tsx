@@ -80,11 +80,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Shaikh Traders Pvt. Ltd. — Global Trade Solutions From Pakistan" },
       { name: "description", content: "Premium import & export from Pakistan: textiles, sportswear, surgical instruments, leather, Himalayan salt, rice & spices — delivered worldwide." },
       { name: "author", content: "Shaikh Traders Private Limited" },
-      { property: "og:title", content: "Shaikh Traders — Global Trade Solutions" },
-      { property: "og:description", content: "Premium import & export from Pakistan, delivered worldwide." },
+      { property: "og:title", content: "Shaikh Traders Pvt. Ltd. — Global Trade Solutions From Pakistan" },
+      { property: "og:description", content: "Premium import & export from Pakistan: textiles, sportswear, surgical instruments, leather, Himalayan salt, rice & spices — delivered worldwide." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Shaikh Traders Pvt. Ltd. — Global Trade Solutions From Pakistan" },
+      { name: "twitter:description", content: "Premium import & export from Pakistan: textiles, sportswear, surgical instruments, leather, Himalayan salt, rice & spices — delivered worldwide." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/9862945f-e990-45ef-9ad7-b2f7f25da77c" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/9862945f-e990-45ef-9ad7-b2f7f25da77c" },
     ],
     links: [
       {
