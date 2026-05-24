@@ -25,9 +25,10 @@ window.onerror = function (message, source, lineno, colno, error) {
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from '@tanstack/react-router'
-import { createRouter } from './router'
-const router = createRouter()
- // check karein aapki router file ka path sahi hai
+import { getRouter } from './router' // Humne sahi function import kiya
+
+// Router ka instance banaya
+const router = getRouter()
 
 const rootElement = document.getElementById('root')!
 
