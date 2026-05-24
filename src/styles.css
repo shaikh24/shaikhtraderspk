@@ -226,3 +226,42 @@
   background-size: 200% 100%;
   animation: shimmer 2.4s linear infinite;
 }
+
+@keyframes orb-drift {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(40px,-30px,0) scale(1.08); }
+}
+@keyframes orb-drift-2 {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(-50px,40px,0) scale(1.12); }
+}
+@keyframes ping-soft {
+  0% { transform: scale(1); opacity: .8; }
+  80%, 100% { transform: scale(2.6); opacity: 0; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-orb { animation: orb-drift 14s ease-in-out infinite; }
+.animate-orb-2 { animation: orb-drift-2 18s ease-in-out infinite; }
+.animate-ping-soft { animation: ping-soft 2.4s cubic-bezier(0,0,.2,1) infinite; }
+.animate-marquee { animation: marquee 38s linear infinite; }
+
+@layer utilities {
+  .bg-grid-luxury {
+    background-image:
+      linear-gradient(oklch(1 0 0 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(1 0 0 / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  .text-balance { text-wrap: balance; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+  .reveal.is-visible { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orb, .animate-orb-2, .animate-float-slow, .animate-ping-soft, .animate-marquee, .animate-shimmer { animation: none !important; }
+}
