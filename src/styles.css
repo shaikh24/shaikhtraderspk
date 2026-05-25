@@ -181,6 +181,8 @@
   --color-gold-soft: var(--gold-soft);
   --color-navy: var(--navy);
   --color-navy-deep: var(--navy-deep);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
 }
 
 @layer utilities {
