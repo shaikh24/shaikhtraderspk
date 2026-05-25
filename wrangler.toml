@@ -1,4 +1,4 @@
 name = "shaikhtraderspk"
 compatibility_date = "2026-05-24"
 
-pages_build_output_dir = "dist"
+pages_build_output_dir = "dist/client"
