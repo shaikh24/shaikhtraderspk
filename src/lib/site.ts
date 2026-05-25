@@ -2,9 +2,9 @@ export const SITE = {
   name: "Shaikh Traders Private Limited",
   short: "Shaikh Traders",
   tagline: "Global Trade Solutions From Pakistan To The World",
-  phone: "+92 300 0000000",
-  whatsapp: "923000000000", // digits only, no + or spaces
-  email: "info@shaikhtraders.com",
+  phone: "+923052019095",
+  whatsapp: "923052019095", // digits only, no + or spaces
+  email: "qamar36@outlook.com",
   address: "Karachi, Sindh, Pakistan",
   year: new Date().getFullYear(),
 };
