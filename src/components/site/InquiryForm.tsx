@@ -1,3 +1,4 @@
+import type { FormEvent, ReactNode } from "react";
 import { useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -48,7 +49,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
   const [submitting, setSubmitting] = useState(false);
   const [dial, setDial] = useState("+92");
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
 
@@ -117,7 +118,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
               <option key={c.code} value={c.dial}>{c.flag} {c.dial}</option>
             ))}
           </select>
-          <input name="phone" disabled={submitting} className={inputCls} placeholder="300 0000000" />
+          <input name="phone" disabled={submitting} className={inputCls} placeholder="305 2019095" />
         </div>
       </Field>
 
@@ -171,7 +172,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
   );
 }
 
-function Field({ label, children, className }: { label: string; children: React.ReactNode; className?: string }) {
+function Field({ label, children, className }: { label: string; children: ReactNode; className?: string }) {
   return (
     <label className={`block ${className ?? ""}`}>
       <span className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</span>
