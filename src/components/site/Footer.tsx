@@ -65,8 +65,8 @@ export function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">Contact</h4>
             <ul className="mt-4 space-y-3 text-sm text-white/80">
               <li className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 text-gold" />{SITE.address}</li>
-              <li className="flex items-start gap-3"><Phone className="mt-0.5 h-4 w-4 text-gold" />{SITE.phone}</li>
-              <li className="flex items-start gap-3"><Mail className="mt-0.5 h-4 w-4 text-gold" />{SITE.email}</li>
+              <li className="flex items-start gap-3"><Phone className="mt-0.5 h-4 w-4 text-gold" /><a href={`tel:${SITE.phone}`} className="transition-colors hover:text-gold">{SITE.phone}</a></li>
+              <li className="flex items-start gap-3"><Mail className="mt-0.5 h-4 w-4 text-gold" /><a href={`mailto:${SITE.email}`} className="transition-colors hover:text-gold">{SITE.email}</a></li>
             </ul>
             <div className="mt-5 flex gap-3">
               {[Linkedin, Facebook, Instagram].map((Icon, i) => (

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
@@ -10,22 +11,29 @@ export function Newsletter({ variant = "inline" }: { variant?: "inline" | "card"
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const parsed = schema.safeParse(email.trim());
     if (!parsed.success) {
       toast.error("Please enter a valid email address.");
       return;
     }
-    setLoading(true);
-    const { error } = await supabase.from("newsletter_subscribers").insert({ email: parsed.data });
-    setLoading(false);
-    if (error && !error.message.includes("duplicate")) {
+    try {
+      setLoading(true);
+      const { error } = await supabase.from("newsletter_subscribers").insert({ email: parsed.data });
+
+      if (error && !error.message.includes("duplicate")) {
+        toast.error("Couldn't subscribe right now. Please try again.");
+        return;
+      }
+      toast.success("Subscribed — welcome aboard.");
+      setEmail("");
+    } catch (error) {
+      console.error("Newsletter submission failed:", error);
       toast.error("Couldn't subscribe right now. Please try again.");
-      return;
+    } finally {
+      setLoading(false);
     }
-    toast.success("Subscribed — welcome aboard.");
-    setEmail("");
   };
 
   const isCard = variant === "card";

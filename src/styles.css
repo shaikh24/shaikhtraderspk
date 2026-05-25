@@ -1,13 +1,4 @@
 @import "tailwindcss" source(none);
-@import "tw-animate-css";
-@source "../src";
-
-/* Baaki ka saara CSS iske neeche jo bhi pehle se likha hai wahi rehne dein */
-
-
-
-
-@import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
 
@@ -91,6 +82,8 @@
   --gold-soft: oklch(0.88 0.08 85);
   --navy: oklch(0.22 0.06 265);
   --navy-deep: oklch(0.14 0.05 265);
+  --whatsapp: oklch(0.72 0.18 150);
+  --whatsapp-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.92 0.012 95);
@@ -136,6 +129,8 @@
   --gold-soft: oklch(0.7 0.1 85);
   --navy: oklch(0.18 0.05 265);
   --navy-deep: oklch(0.1 0.04 265);
+  --whatsapp: oklch(0.72 0.18 150);
+  --whatsapp-foreground: oklch(1 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(1 0 0 / 10%);
@@ -181,6 +176,8 @@
   --color-gold-soft: var(--gold-soft);
   --color-navy: var(--navy);
   --color-navy-deep: var(--navy-deep);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
 }
 
 @layer utilities {
