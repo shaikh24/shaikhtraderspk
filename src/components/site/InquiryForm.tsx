@@ -1,4 +1,4 @@
-// Inquiryform.tsx
+// InquiryForm.tsx
 import type { FormEvent, ReactNode } from "react";
 import { useState } from "react";
 import { z } from "zod";
@@ -100,7 +100,7 @@ const ALL_COUNTRIES = [
   { code: "LR", name: "Liberia", dial: "+231", flag: "🇱🇷" },
   { code: "LY", name: "Libya", dial: "+218", flag: "🇱🇾" },
   { code: "LT", name: "Lithuania", dial: "+370", flag: "🇱🇹" },
-  { code: "LU", name: "Luxembourg", dial: "+352", flag: "🇱🇺" },
+  { code: "LU", name: "Luxembourg", dial: "+352", font: "🇱🇺" },
   { code: "MO", name: "Macau", dial: "+853", flag: "🇲🇴" },
   { code: "MG", name: "Madagascar", dial: "+261", flag: "🇲🇬" },
   { code: "MW", name: "Malawi", dial: "+265", flag: "🇲🇼" },
@@ -221,7 +221,6 @@ const CATEGORIES = [
 const SHIPPING = ["Sea Freight (FCL)", "Sea Freight (LCL)", "Air Freight", "Express Courier", "Not sure"];
 const BUDGETS = ["< $5k", "$5k – $25k", "$25k – $100k", "$100k – $500k", "$500k+"];
 
-// Component definition with proper 'source' injection support
 export function InquiryForm({ source = "website" }: { source?: string }) {
   const [submitting, setSubmitting] = useState(false);
   const [dial, setDial] = useState("+92");
@@ -248,7 +247,6 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
     setSubmitting(true);
 
     try {
-      // Adding 'source' column mapping back since it exists in the database schema
       const { error } = await supabase.from("inquiries").insert({
         full_name: d.full_name,
         company_name: d.company_name || null,
@@ -261,7 +259,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
         shipping_preference: d.shipping_preference || null,
         budget_range: d.budget_range || null,
         message: d.message || null,
-        source: source, // 'source' values will now successfully populate
+        source: source,
       });
 
       if (error) {
@@ -316,7 +314,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
       </Field>
       
       <Field label="Product Requirement" className="sm:col-span-2">
-  <input name="product_requirement" disabled={submitting} className={inputCls} placeholder="e.g. 100% cotton t-shirts, 180 GSM" />
+        <input name="product_requirement" disabled={submitting} className={inputCls} placeholder="e.g. 100% cotton t-shirts, 180 GSM" />
       </Field>
       
       <Field label="Quantity"><input name="quantity" disabled={submitting} className={inputCls} placeholder="e.g. 10,000 pcs" /></Field>
@@ -356,5 +354,5 @@ function Field({ label, children, className }: { label: string; children: ReactN
       {children}
     </label>
   );
-    }
-  
+   }
+    
