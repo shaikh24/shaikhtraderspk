@@ -1,9 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Ship } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo.png";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,9 +31,11 @@ export function Navbar() {
     >
       <div className="container-px mx-auto flex h-16 max-w-7xl items-center justify-between md:h-20">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full gradient-gold shadow-gold">
-            <Ship className="h-5 w-5 text-navy-deep" />
-          </span>
+          <img
+            src={logo}
+            alt={`${SITE.name} logo`}
+            className="h-11 w-11 rounded-full object-contain bg-white/90 dark:bg-white p-1 shadow-gold ring-1 ring-gold/30"
+          />
           <span className="leading-tight">
             <span className="block text-sm font-semibold tracking-wide text-foreground">{SITE.short}</span>
             <span className="block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Pvt. Ltd.</span>
