@@ -235,12 +235,13 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
     fd.delete("file"); 
     
     const raw = Object.fromEntries(fd.entries()) as Record<string, string>;
-    raw.dial = dial; // Fallback sync
+    raw.dial = dial; // Sync select state value safely
 
     const parsed = schema.safeParse(raw);
     if (!parsed.success) {
-      alert("ZOD VALIDATION FAILED: " + JSON.stringify(parsed.error.flatten().fieldErrors));
-      toast.error(parsed.error.issues[0]?.message ?? "Please check your inputs.");
+      // Safely showing specific field validation failure inside Sonner toast
+      const firstIssue = parsed.error.issues[0];
+      toast.error(firstIssue ? `${firstIssue.path.join(".")}: ${firstIssue.message}` : "Please check your inputs.");
       return;
     }
 
@@ -265,7 +266,6 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
 
       if (error) {
         console.error("Database error:", error);
-        alert("SUPABASE DATABASE ERROR: " + error.message);
         toast.error(`Submission failed: ${error.message}`);
       } else {
         toast.success("Inquiry received — our team will respond within 24 hours.");
@@ -273,7 +273,6 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
       }
     } catch (err) {
       console.error("Caught Form Crash:", err);
-      alert("TRANSMISSION CRASH: " + String(err));
       toast.error("Form transmission error. Please try again.");
     } finally {
       setSubmitting(false);
@@ -358,4 +357,4 @@ function Field({ label, children, className }: { label: string; children: ReactN
     </label>
   );
    }
-   
+  
