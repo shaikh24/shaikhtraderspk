@@ -221,9 +221,10 @@ const CATEGORIES = [
 const SHIPPING = ["Sea Freight (FCL)", "Sea Freight (LCL)", "Air Freight", "Express Courier", "Not sure"];
 const BUDGETS = ["< $5k", "$5k – $25k", "$25k – $100k", "$100k – $500k", "$500k+"];
 
-export function InquiryForm() {
+// Component definition with proper 'source' injection support
+export function InquiryForm({ source = "website" }: { source?: string }) {
   const [submitting, setSubmitting] = useState(false);
-  const [dial, setDial] = useState("+92"); // Default selection Pakistan code
+  const [dial, setDial] = useState("+92");
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -247,7 +248,7 @@ export function InquiryForm() {
     setSubmitting(true);
 
     try {
-      // Fixed insertion by removing 'source' which is missing from database
+      // Adding 'source' column mapping back since it exists in the database schema
       const { error } = await supabase.from("inquiries").insert({
         full_name: d.full_name,
         company_name: d.company_name || null,
@@ -260,6 +261,7 @@ export function InquiryForm() {
         shipping_preference: d.shipping_preference || null,
         budget_range: d.budget_range || null,
         message: d.message || null,
+        source: source, // 'source' values will now successfully populate
       });
 
       if (error) {
@@ -315,7 +317,7 @@ export function InquiryForm() {
       
       <Field label="Product Requirement" className="sm:col-span-2">
         <input name="product_requirement" disabled={submitting} className={inputCls} placeholder="e.g. 100% cotton t-shirts, 180 GSM" />
-      </Field>
+      </dfn></Field>
       
       <Field label="Quantity"><input name="quantity" disabled={submitting} className={inputCls} placeholder="e.g. 10,000 pcs" /></Field>
       
@@ -354,5 +356,5 @@ function Field({ label, children, className }: { label: string; children: ReactN
       {children}
     </label>
   );
-   }
-    
+    }
+  
