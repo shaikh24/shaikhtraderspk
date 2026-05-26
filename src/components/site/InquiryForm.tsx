@@ -316,8 +316,8 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
       </Field>
       
       <Field label="Product Requirement" className="sm:col-span-2">
-        <input name="product_requirement" disabled={submitting} className={inputCls} placeholder="e.g. 100% cotton t-shirts, 180 GSM" />
-      </dfn></Field>
+  <input name="product_requirement" disabled={submitting} className={inputCls} placeholder="e.g. 100% cotton t-shirts, 180 GSM" />
+      </Field>
       
       <Field label="Quantity"><input name="quantity" disabled={submitting} className={inputCls} placeholder="e.g. 10,000 pcs" /></Field>
       
