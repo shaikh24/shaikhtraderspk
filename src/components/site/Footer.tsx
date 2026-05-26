@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Ship, Mail, Phone, MapPin, Linkedin, Facebook, Instagram, ShieldCheck, BadgeCheck, Award, Container } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, ShieldCheck, BadgeCheck, Award, Container } from "lucide-react";
 import { SITE, NAV } from "@/lib/site";
 import { Newsletter } from "./Newsletter";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   return (
@@ -31,10 +32,12 @@ export function Footer() {
 
         <div className="grid gap-12 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-full gradient-gold">
-                <Ship className="h-5 w-5 text-navy-deep" />
-              </span>
+            <div className="flex items-center gap-3">
+              <img
+                src={logo}
+                alt={`${SITE.name} logo`}
+                className="h-14 w-14 rounded-full object-contain bg-white p-1.5 ring-1 ring-gold/40"
+              />
               <div>
                 <div className="text-base font-semibold tracking-wide">{SITE.name}</div>
                 <div className="text-[11px] uppercase tracking-[0.2em] text-gold-soft">Global Trade. Pakistani Roots.</div>
