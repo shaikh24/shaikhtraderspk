@@ -100,7 +100,7 @@ const ALL_COUNTRIES = [
   { code: "LR", name: "Liberia", dial: "+231", flag: "🇱🇷" },
   { code: "LY", name: "Libya", dial: "+218", flag: "🇱🇾" },
   { code: "LT", name: "Lithuania", dial: "+370", flag: "🇱🇹" },
-  { code: "LU", name: "Luxembourg", dial: "+352", font: "🇱🇺" },
+  { code: "LU", name: "Luxembourg", dial: "+352", flag: "🇱🇺" },
   { code: "MO", name: "Macau", dial: "+853", flag: "🇲🇴" },
   { code: "MG", name: "Madagascar", dial: "+261", flag: "🇲🇬" },
   { code: "MW", name: "Malawi", dial: "+265", flag: "🇲🇼" },
@@ -235,10 +235,11 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
     fd.delete("file"); 
     
     const raw = Object.fromEntries(fd.entries()) as Record<string, string>;
-    raw.dial = dial;
+    raw.dial = dial; // Fallback sync
 
     const parsed = schema.safeParse(raw);
     if (!parsed.success) {
+      alert("ZOD VALIDATION FAILED: " + JSON.stringify(parsed.error.flatten().fieldErrors));
       toast.error(parsed.error.issues[0]?.message ?? "Please check your inputs.");
       return;
     }
@@ -264,6 +265,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
 
       if (error) {
         console.error("Database error:", error);
+        alert("SUPABASE DATABASE ERROR: " + error.message);
         toast.error(`Submission failed: ${error.message}`);
       } else {
         toast.success("Inquiry received — our team will respond within 24 hours.");
@@ -271,6 +273,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
       }
     } catch (err) {
       console.error("Caught Form Crash:", err);
+      alert("TRANSMISSION CRASH: " + String(err));
       toast.error("Form transmission error. Please try again.");
     } finally {
       setSubmitting(false);
@@ -288,7 +291,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
       
       <Field label="Phone">
         <div className="flex gap-2">
-          <select value={dial} disabled={submitting} onChange={(e) => setDial(e.target.value)} className={inputCls + " w-36"}>
+          <select name="dial" value={dial} disabled={submitting} onChange={(e) => setDial(e.target.value)} className={inputCls + " w-36"}>
             {ALL_COUNTRIES.map((c) => (
               <option key={`dial-${c.code}`} value={c.dial}>{c.flag} {c.dial} ({c.code})</option>
             ))}
@@ -355,4 +358,4 @@ function Field({ label, children, className }: { label: string; children: ReactN
     </label>
   );
    }
-    
+   
