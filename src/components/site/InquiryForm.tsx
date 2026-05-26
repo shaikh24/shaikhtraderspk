@@ -89,7 +89,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
 
       if (error) {
         console.error("Database error:", error);
-        toast.error("Couldn't submit. Please check database connectivity.");
+        toast.error(`Submission failed: ${error.message}`);
       } else {
         toast.success("Inquiry received — our team will respond within 24 hours.");
         currentForm.reset();
