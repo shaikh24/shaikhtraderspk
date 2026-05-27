@@ -33,10 +33,10 @@ const CATEGORIES: Category[] = [
     ],
     subcategories: ["Combed Yarn", "Denim", "Jersey Knit", "Twill", "Poplin", "Fleece", "Canvas", "Greige Fabric"],
     images: [
-      { url: u("photo-1558618666-fcd25c85cd64"), alt: "Premium combed cotton yarn cones" },
-      { url: u("photo-1581655353564-df123a1eb820"), alt: "Stacked denim fabric rolls" },
-      { url: u("photo-1606293459209-7e564b62cfa6"), alt: "Industrial textile loom in operation" },
-      { url: u("photo-1591375275624-c2d4ce5dbf86"), alt: "Folded premium fabric samples" },
+      { url: u("photo-1528459801416-a9e53bbf4e17"), alt: "Stacked premium fabric rolls in showroom" },
+      { url: u("photo-1452860606245-08befc0ff44b"), alt: "Indigo denim fabric close-up" },
+      { url: u("photo-1558769132-cb1aea458c5e"), alt: "Folded textile swatches in earth tones" },
+      { url: u("photo-1583744946564-b52ac1c389c8"), alt: "Combed cotton yarn cones on spindle" },
     ],
   },
   {
@@ -55,10 +55,10 @@ const CATEGORIES: Category[] = [
     ],
     subcategories: ["Hoodies", "Tracksuits", "Jerseys", "Compression Wear", "Shorts", "Leggings", "Tank Tops", "Cycling Kits"],
     images: [
-      { url: u("photo-1556817411-31ae72fa3ea0"), alt: "Athletic performance hoodie" },
-      { url: u("photo-1483721310020-03333e577078"), alt: "Premium tracksuit set" },
-      { url: u("photo-1483721310020-03333e577078"), alt: "Sports jersey collection" },
-      { url: u("photo-1571019613454-1cb2f99b2d8b"), alt: "Gym athlete in performance wear" },
+      { url: u("photo-1571019613454-1cb2f99b2d8b"), alt: "Athlete training in performance gym wear" },
+      { url: u("photo-1556906781-9a412961c28c"), alt: "Premium athletic hoodie product shot" },
+      { url: u("photo-1517466787929-bc90951d0974"), alt: "Pro sports jersey lineup" },
+      { url: u("photo-1517836357463-d25dfeac3438"), alt: "Compression and tracksuit performance wear" },
     ],
   },
   {
@@ -77,10 +77,10 @@ const CATEGORIES: Category[] = [
     ],
     subcategories: ["Bed Linen", "Bath Towels", "Bathrobes", "Kitchen Textile", "Cushions", "Curtains", "Table Linen", "Blankets"],
     images: [
-      { url: u("photo-1522771739844-6a9f6d5f14af"), alt: "Luxury hotel bedsheets" },
-      { url: u("photo-1600585154340-be6161a56a0c"), alt: "Plush folded bath towels" },
-      { url: u("photo-1540518614846-7eded433c457"), alt: "Modern bedroom textile styling" },
-      { url: u("photo-1616627561950-9f746e330187"), alt: "Elegant curtains and decor" },
+      { url: u("photo-1631049307264-da0ec9d70304"), alt: "Crisp white hotel-grade bed linen" },
+      { url: u("photo-1600369671236-e74521d4b6ad"), alt: "Stacked plush spa bath towels" },
+      { url: u("photo-1505693416388-ac5ce068fe85"), alt: "Luxury bedroom interior with premium linens" },
+      { url: u("photo-1616594039964-ae9021a400a0"), alt: "Elegant draped curtains in modern interior" },
     ],
   },
   {
@@ -99,10 +99,10 @@ const CATEGORIES: Category[] = [
     ],
     subcategories: ["Dental Kits", "Micro Scissors", "Forceps", "Scalpels", "Retractors", "Orthopedic Tools", "Veterinary", "Beauty Instruments"],
     images: [
-      { url: u("photo-1606811971618-4486d14f3f99"), alt: "Precision dental instrument kit" },
-      { url: u("photo-1584036561566-baf8f5f1b144"), alt: "Surgical micro scissors close-up" },
-      { url: u("photo-1530026405186-ed1f139313f8"), alt: "Medical-grade steel instruments" },
-      { url: u("photo-1551601651-2a8555f1a136"), alt: "Surgical tools on dark surface" },
+      { url: u("photo-1666214280391-8ff5bd3c0bf0"), alt: "Stainless surgical instruments laid out" },
+      { url: u("photo-1581595220892-b0739db3ba8c"), alt: "Precision dental instrument kit" },
+      { url: u("photo-1583912267550-d6c2ac3196c0"), alt: "Surgeon holding stainless steel forceps" },
+      { url: u("photo-1551601651-2a8555f1a136"), alt: "Medical-grade steel tools on dark surface" },
     ],
   },
   {
@@ -121,10 +121,10 @@ const CATEGORIES: Category[] = [
     ],
     subcategories: ["Wallets", "Executive Belts", "Bags & Briefcases", "Jackets", "Gloves", "Industrial Gloves", "Accessories", "Wallets"],
     images: [
-      { url: u("photo-1627123424574-724758594e93"), alt: "Luxury leather wallet" },
-      { url: u("photo-1624222247344-550fb60583dc"), alt: "Executive leather belt" },
-      { url: u("photo-1548036328-c9fa89d128fa"), alt: "Premium leather briefcase" },
-      { url: u("photo-1556905055-8f358a7a47b2"), alt: "Industrial leather gloves" },
+      { url: u("photo-1547949003-9792a18a2601"), alt: "Premium leather briefcase on desk" },
+      { url: u("photo-1606503825008-909a67e63c3d"), alt: "Hand-stitched luxury leather wallet" },
+      { url: u("photo-1553062407-98eeb64c6a62"), alt: "Executive leather belt detail" },
+      { url: u("photo-1473445730015-841f29a9490b"), alt: "Tan leather goods flat lay" },
     ],
   },
   {
@@ -143,10 +143,10 @@ const CATEGORIES: Category[] = [
     ],
     subcategories: ["Edible Salt", "Salt Lamps", "Salt Blocks", "Bath Salt", "Tea Light Holders", "Animal Lick", "Salt Tiles", "Inhalers"],
     images: [
-      { url: u("photo-1605493725784-56d5266a64d6"), alt: "Glowing Himalayan salt lamp" },
-      { url: u("photo-1615485290382-441e4d049cb5"), alt: "Pink salt crystals close-up" },
-      { url: u("photo-1599909533730-c2e8e2c79994"), alt: "Bulk pink salt packaging" },
-      { url: u("photo-1518110925495-b37653bd2474"), alt: "Carved salt lamp display" },
+      { url: u("photo-1615486511484-92e172cc4fe0"), alt: "Glowing amber Himalayan salt lamp" },
+      { url: u("photo-1615486363973-f79d875780cf"), alt: "Pink Himalayan salt crystals close-up" },
+      { url: u("photo-1518110925495-b37653bd2474"), alt: "Carved salt lamp warm glow" },
+      { url: u("photo-1519864600265-abb23847ef2c"), alt: "Pink salt in wooden bowl" },
     ],
   },
   {
@@ -166,9 +166,9 @@ const CATEGORIES: Category[] = [
     subcategories: ["Super Basmati", "1121 Basmati", "Red Chili", "Turmeric", "Cumin", "Coriander", "Black Pepper", "Cardamom"],
     images: [
       { url: u("photo-1586201375761-83865001e31c"), alt: "Premium long-grain Basmati rice" },
-      { url: u("photo-1596797038530-2c107229654b"), alt: "Colorful bowls of organic spices" },
-      { url: u("photo-1532336414038-cf19250c5757"), alt: "Vibrant turmeric and chili powders" },
-      { url: u("photo-1505253716362-afaea1d3d1af"), alt: "Whole spices market display" },
+      { url: u("photo-1532336414038-cf19250c5757"), alt: "Vibrant bowls of organic spices" },
+      { url: u("photo-1599909533730-c2e8e2c79994"), alt: "Cumin and coriander spices in scoops" },
+      { url: u("photo-1509358271058-acd22cc93898"), alt: "Whole spices and chilies in market display" },
     ],
   },
 ];
