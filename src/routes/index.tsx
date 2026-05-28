@@ -14,6 +14,7 @@ import { Section } from "@/components/site/Section";
 import { Newsletter } from "@/components/site/Newsletter";
 import { TrustBar } from "@/components/site/TrustBar";
 import { WorldMap } from "@/components/site/WorldMap";
+import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { Reveal } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/")({
@@ -114,6 +115,9 @@ function Index() {
 
       {/* TRUST BAR */}
       <TrustBar />
+
+      {/* GLOBAL PRESENCE */}
+      <GlobalPresence />
 
       {/* PRODUCTS */}
       <Section eyebrow="Product Categories" title="Sourced. Inspected. Shipped." subtitle="From raw fabrics to finished goods — a curated catalog refined over a decade of export experience." center>
