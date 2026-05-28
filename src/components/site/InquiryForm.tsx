@@ -5,6 +5,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { CheckCircle2, Loader2, Send } from "lucide-react";
 
 // Poori duniya ke standard countries unke international dial codes aur flags ke sath
 const ALL_COUNTRIES = [
@@ -198,7 +199,13 @@ const schema = z.object({
   company_name: z.string().trim().max(160).optional().or(z.literal("")),
   email: z.string().trim().email("Invalid email").max(255),
   dial: z.string().max(8),
-  phone: z.string().trim().max(32).optional().or(z.literal("")),
+  phone: z
+    .string()
+    .trim()
+    .max(32)
+    .regex(/^[+\d][\d\s().-]{5,31}$/, "Enter a valid phone number")
+    .optional()
+    .or(z.literal("")),
   country: z.string().min(1, "Select a country").max(80),
   product_category: z.string().max(120).optional().or(z.literal("")),
   product_requirement: z.string().trim().max(500).optional().or(z.literal("")),
@@ -223,6 +230,7 @@ const BUDGETS = ["< $5k", "$5k – $25k", "$25k – $100k", "$100k – $500k", "
 
 export function InquiryForm({ source = "website" }: { source?: string }) {
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [dial, setDial] = useState("+92");
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -270,6 +278,7 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
       } else {
         toast.success("Inquiry received — our team will respond within 24 hours.");
         currentForm.reset();
+        setSubmitted(true);
       }
     } catch (err) {
       console.error("Caught Form Crash:", err);
@@ -281,6 +290,30 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
 
   const inputCls =
     "w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none transition-colors focus:border-gold focus:ring-2 focus:ring-gold/20 disabled:opacity-50";
+
+  if (submitted) {
+    return (
+      <div className="relative overflow-hidden rounded-2xl border border-gold/40 bg-card p-8 sm:p-12 text-center shadow-elegant animate-fade-up">
+        <div aria-hidden className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-[radial-gradient(circle,oklch(0.78_0.13_85/0.25),transparent_70%)] blur-2xl" />
+        <div className="relative">
+          <span className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full gradient-gold text-navy-deep shadow-gold">
+            <CheckCircle2 className="h-8 w-8" strokeWidth={2.25} />
+          </span>
+          <h3 className="mt-6 text-2xl sm:text-3xl font-semibold text-foreground">Thank you — your inquiry is in.</h3>
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+            A senior trade specialist from Shaikh Traders will personally review your requirement and reply within <span className="font-semibold text-foreground">24 business hours</span>. Please keep an eye on your inbox.
+          </p>
+          <button
+            type="button"
+            onClick={() => setSubmitted(false)}
+            className="mt-7 inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition hover:border-gold hover:text-gold"
+          >
+            Submit another inquiry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
@@ -342,7 +375,11 @@ export function InquiryForm({ source = "website" }: { source?: string }) {
       <div className="sm:col-span-2 mt-2 flex items-center justify-between gap-4 flex-wrap">
         <p className="text-xs text-muted-foreground">Your information is encrypted and never shared with third parties.</p>
         <Button type="submit" disabled={submitting} size="lg" className="rounded-full gradient-gold text-navy-deep hover:opacity-90 shadow-gold border-0">
-          {submitting ? "Sending…" : "Send Inquiry"}
+          {submitting ? (
+            <span className="inline-flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" /> Sending…</span>
+          ) : (
+            <span className="inline-flex items-center gap-2">Send Inquiry <Send className="h-4 w-4" /></span>
+          )}
         </Button>
       </div>
     </form>
