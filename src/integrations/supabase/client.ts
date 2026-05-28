@@ -6,8 +6,14 @@ function createSupabaseClient() {
   // Use import.meta.env for client-side (Vite build-time replacement)
   // Fall back to process.env for SSR (server-side rendering)
   // Fall back to exact custom credentials if environment variables are missing
-  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || "https://wdejexifsvjswqoeewdk.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || "sb_publishable_peIt5L3Vtiuf1oxdnofU6Q_HVURmO0a";
+  const SUPABASE_URL =
+    import.meta.env.VITE_SUPABASE_URL ||
+    process.env.SUPABASE_URL ||
+    "https://nrfztperevlxfwgnfxzb.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY =
+    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY ||
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5yZnp0cGVyZXZseGZ3Z25meHpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2MDQ1NzUsImV4cCI6MjA5NTE4MDU3NX0.1Bex6yuNc0m2bR2YuP23HZRGEzFUdDlDho1MZ8FN-aw";
 
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
     const missing = [
