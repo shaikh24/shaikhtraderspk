@@ -33,10 +33,10 @@ const CATEGORIES: Category[] = [
     ],
     subcategories: ["Combed Yarn", "Denim", "Jersey Knit", "Twill", "Poplin", "Fleece", "Canvas", "Greige Fabric"],
     images: [
-      { url: u("photo-1528459801416-a9e53bbf4e17"), alt: "Stacked premium fabric rolls in showroom" },
-      { url: u("photo-1452860606245-08befc0ff44b"), alt: "Indigo denim fabric close-up" },
-      { url: u("photo-1558769132-cb1aea458c5e"), alt: "Folded textile swatches in earth tones" },
-      { url: u("photo-1583744946564-b52ac1c389c8"), alt: "Combed cotton yarn cones on spindle" },
+      { url: u("photo-1610725664285-7c57e6eeac3f"), alt: "Industrial weaving loom in textile mill" },
+      { url: u("photo-1599643477877-530eb83abc8e"), alt: "Bulk denim fabric rolls in wholesale warehouse" },
+      { url: u("photo-1605002123544-7c91d4f9c54c"), alt: "Cotton yarn spools on manufacturing spindle" },
+      { url: u("photo-1620799140408-edc6dcb6d633"), alt: "Raw cotton fiber texture close-up" },
     ],
   },
   {
@@ -99,10 +99,10 @@ const CATEGORIES: Category[] = [
     ],
     subcategories: ["Dental Kits", "Micro Scissors", "Forceps", "Scalpels", "Retractors", "Orthopedic Tools", "Veterinary", "Beauty Instruments"],
     images: [
-      { url: u("photo-1666214280391-8ff5bd3c0bf0"), alt: "Stainless surgical instruments laid out" },
-      { url: u("photo-1581595220892-b0739db3ba8c"), alt: "Precision dental instrument kit" },
-      { url: u("photo-1583912267550-d6c2ac3196c0"), alt: "Surgeon holding stainless steel forceps" },
-      { url: u("photo-1551601651-2a8555f1a136"), alt: "Medical-grade steel tools on dark surface" },
+      { url: u("photo-1530026405186-ed1f139313f8"), alt: "Sterile stainless steel surgical tools set" },
+      { url: u("photo-1609220136736-443140cffec6"), alt: "Precision dental instruments on clean tray" },
+      { url: u("photo-1584515933487-779824d29309"), alt: "Medical forceps on minimalist background" },
+      { url: u("photo-1631815588090-d4bfec5b1ccb"), alt: "Surgical scalpel and scissors on dark corporate surface" },
     ],
   },
   {
@@ -143,10 +143,10 @@ const CATEGORIES: Category[] = [
     ],
     subcategories: ["Edible Salt", "Salt Lamps", "Salt Blocks", "Bath Salt", "Tea Light Holders", "Animal Lick", "Salt Tiles", "Inhalers"],
     images: [
-      { url: u("photo-1615486511484-92e172cc4fe0"), alt: "Glowing amber Himalayan salt lamp" },
-      { url: u("photo-1615486363973-f79d875780cf"), alt: "Pink Himalayan salt crystals close-up" },
-      { url: u("photo-1518110925495-b37653bd2474"), alt: "Carved salt lamp warm glow" },
-      { url: u("photo-1519864600265-abb23847ef2c"), alt: "Pink salt in wooden bowl" },
+      { url: u("photo-1603199506016-b9a594b593c0"), alt: "Glowing Himalayan pink salt lamp with amber light" },
+      { url: u("photo-1612257999829-7add0fc16df1"), alt: "Premium pink Himalayan salt crystals in bulk" },
+      { url: u("photo-1593604572577-1c6c44fa2049"), alt: "Gourmet Himalayan pink salt blocks arrangement" },
+      { url: u("photo-1623073864020-26a8c2436a1c"), alt: "Food-grade coarse pink salt crystals premium presentation" },
     ],
   },
   {
