@@ -20,6 +20,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -76,6 +77,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
+  id: '/$category',
+  path: '/$category',
+  getParentRoute: () => ProductsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -85,10 +91,11 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/markets': typeof MarketsRoute
   '/privacy': typeof PrivacyRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
+  '/products/$category': typeof ProductsCategoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -98,10 +105,11 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/markets': typeof MarketsRoute
   '/privacy': typeof PrivacyRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
+  '/products/$category': typeof ProductsCategoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -112,10 +120,11 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/markets': typeof MarketsRoute
   '/privacy': typeof PrivacyRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
+  '/products/$category': typeof ProductsCategoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/quote'
     | '/services'
     | '/terms'
+    | '/products/$category'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/quote'
     | '/services'
     | '/terms'
+    | '/products/$category'
   id:
     | '__root__'
     | '/'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/quote'
     | '/services'
     | '/terms'
+    | '/products/$category'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -167,7 +179,7 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRoute
   MarketsRoute: typeof MarketsRoute
   PrivacyRoute: typeof PrivacyRoute
-  ProductsRoute: typeof ProductsRoute
+  ProductsRoute: typeof ProductsRouteWithChildren
   QuoteRoute: typeof QuoteRoute
   ServicesRoute: typeof ServicesRoute
   TermsRoute: typeof TermsRoute
@@ -252,8 +264,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/$category': {
+      id: '/products/$category'
+      path: '/$category'
+      fullPath: '/products/$category'
+      preLoaderRoute: typeof ProductsCategoryRouteImport
+      parentRoute: typeof ProductsRoute
+    }
   }
 }
+
+interface ProductsRouteChildren {
+  ProductsCategoryRoute: typeof ProductsCategoryRoute
+}
+
+const ProductsRouteChildren: ProductsRouteChildren = {
+  ProductsCategoryRoute: ProductsCategoryRoute,
+}
+
+const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
+  ProductsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -263,7 +294,7 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRoute,
   MarketsRoute: MarketsRoute,
   PrivacyRoute: PrivacyRoute,
-  ProductsRoute: ProductsRoute,
+  ProductsRoute: ProductsRouteWithChildren,
   QuoteRoute: QuoteRoute,
   ServicesRoute: ServicesRoute,
   TermsRoute: TermsRoute,
