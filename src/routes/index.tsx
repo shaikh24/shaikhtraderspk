@@ -22,13 +22,13 @@ export const Route = createFileRoute("/")({
 });
 
 const PRODUCTS = [
-  { name: "Textile & Fabrics", img: pTextile, desc: "Premium cotton, blends and woven fabrics for global apparel brands." },
-  { name: "Sportswear & Gym Wear", img: pSport, desc: "Performance-grade activewear, custom branded and OEM ready." },
-  { name: "Home Textile", img: pHome, desc: "Bed linens, towels, and cushions in luxury cotton finishes." },
-  { name: "Surgical Instruments", img: pSurgical, desc: "ISO & CE compliant stainless instruments from Sialkot." },
-  { name: "Leather Products", img: pLeather, desc: "Hand-finished jackets, bags, gloves and accessories." },
-  { name: "Himalayan Pink Salt", img: pSalt, desc: "Edible salt, lamps and bath products, food-grade certified." },
-  { name: "Rice & Spices", img: pRice, desc: "Basmati rice and premium spices, food-safety certified." },
+  { name: "Textile & Fabrics", slug: "textile", img: pTextile, desc: "Premium cotton, blends and woven fabrics for global apparel brands." },
+  { name: "Sportswear & Gym Wear", slug: "sportswear", img: pSport, desc: "Performance-grade activewear, custom branded and OEM ready." },
+  { name: "Home Textile", slug: "home-textile", img: pHome, desc: "Bed linens, towels, and cushions in luxury cotton finishes." },
+  { name: "Surgical Instruments", slug: "surgical", img: pSurgical, desc: "ISO & CE compliant stainless instruments from Sialkot." },
+  { name: "Leather Products", slug: "leather", img: pLeather, desc: "Hand-finished jackets, bags, gloves and accessories." },
+  { name: "Himalayan Pink Salt", slug: "himalayan-pink-salt", img: pSalt, desc: "Edible salt, lamps and bath products, food-grade certified." },
+  { name: "Rice & Spices", slug: "rice-spices", img: pRice, desc: "Basmati rice and premium spices, food-safety certified." },
 ];
 
 const SERVICES = [
@@ -124,7 +124,11 @@ function Index() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((p, i) => (
             <Reveal key={p.name} delay={i * 70}>
-              <article className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 hover:-translate-y-1.5 hover:border-gold/60 hover:shadow-[0_24px_60px_-24px_oklch(0.22_0.06_265/0.45)]">
+              <Link
+                to="/products/$category"
+                params={{ category: p.slug }}
+                className="group relative block h-full overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 hover:-translate-y-1.5 hover:border-gold/60 hover:shadow-[0_24px_60px_-24px_oklch(0.22_0.06_265/0.45)]"
+              >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img src={p.img} alt={p.name} loading="lazy" width={800} height={600} className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 via-navy-deep/10 to-transparent" />
@@ -136,14 +140,14 @@ function Index() {
                 <div className="p-6">
                   <p className="text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
                   <div className="mt-5 flex items-center justify-between">
-                    <Link to="/quote" className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors hover:text-gold">
-                      Inquire now <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors group-hover:text-gold">
+                      Explore category <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
                     <span className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">MOQ on request</span>
                   </div>
                 </div>
                 <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-transparent via-gold to-transparent transition-transform duration-500 group-hover:scale-x-100" />
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>
