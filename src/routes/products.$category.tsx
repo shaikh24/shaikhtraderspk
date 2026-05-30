@@ -4,6 +4,7 @@ import { Section } from "@/components/site/Section";
 import { CategoryDetail } from "@/components/site/CategoryDetail";
 import { CATEGORIES, getCategoryBySlug } from "@/lib/categories";
 import { ArrowRight, ChevronLeft } from "lucide-react";
+import { SampleRequestDialog } from "@/components/site/SampleRequestDialog";
 
 function CategoryPage() {
   const { category: slug } = Route.useParams();
@@ -39,6 +40,10 @@ function CategoryPage() {
       </div>
 
       <CategoryDetail category={category} />
+
+      <div className="mt-10 flex justify-center">
+        <SampleRequestDialog defaultCategory={category.name} />
+      </div>
 
       <div className="mt-20 border-t border-border pt-12">
         <h3 className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-gradient-gold">
