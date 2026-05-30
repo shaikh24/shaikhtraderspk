@@ -83,6 +83,57 @@ export type Database = {
         }
         Relationships: []
       }
+      sample_requests: {
+        Row: {
+          company_name: string | null
+          country: string | null
+          courier_account: string | null
+          courier_provider: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          notes: string | null
+          phone: string | null
+          product_category: string | null
+          product_specs: string
+          request_type: string
+          shipping_address: string | null
+        }
+        Insert: {
+          company_name?: string | null
+          country?: string | null
+          courier_account?: string | null
+          courier_provider?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          product_category?: string | null
+          product_specs: string
+          request_type?: string
+          shipping_address?: string | null
+        }
+        Update: {
+          company_name?: string | null
+          country?: string | null
+          courier_account?: string | null
+          courier_provider?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          product_category?: string | null
+          product_specs?: string
+          request_type?: string
+          shipping_address?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

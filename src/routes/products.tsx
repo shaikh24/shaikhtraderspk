@@ -4,6 +4,7 @@ import { CategoryDetail } from "@/components/site/CategoryDetail";
 import { CATEGORIES } from "@/lib/categories";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { SampleRequestDialog } from "@/components/site/SampleRequestDialog";
 
 function ProductsPage() {
   const [activeId, setActiveId] = useState(CATEGORIES[0].id);
@@ -42,7 +43,8 @@ function ProductsPage() {
 
       <CategoryDetail category={active} />
 
-      <div className="mt-10 text-center">
+      <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <SampleRequestDialog defaultCategory={active.name} />
         <Link
           to="/products/$category"
           params={{ category: active.slug }}

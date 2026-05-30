@@ -5,6 +5,8 @@ import { NAV, SITE } from "@/lib/site";
 import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
+import { SampleRequestDialog } from "./SampleRequestDialog";
+import { Package } from "lucide-react";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -68,6 +70,14 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <SampleRequestDialog>
+            <button
+              type="button"
+              className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-gold/50 px-4 py-2 text-xs font-semibold text-foreground hover:bg-gold hover:text-navy-deep transition"
+            >
+              <Package className="h-3.5 w-3.5" /> Free Sample
+            </button>
+          </SampleRequestDialog>
           <Link
             to="/quote"
             className="hidden md:inline-flex items-center rounded-full gradient-gold px-5 py-2 text-sm font-semibold text-navy-deep shadow-gold hover:opacity-90 transition-opacity"
@@ -94,6 +104,9 @@ export function Navbar() {
             ))}
             <Link to="/quote" className="mt-2 rounded-full gradient-gold px-5 py-2.5 text-center text-sm font-semibold text-navy-deep">
               Request Quote
+            </Link>
+            <Link to="/policies" className="rounded-md px-3 py-2.5 text-sm font-medium hover:bg-muted">
+              Trade Policies
             </Link>
           </nav>
         </div>
