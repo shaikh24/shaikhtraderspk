@@ -61,6 +61,7 @@ export function Footer() {
                 </li>
               ))}
               <li><Link to="/quote" className="hover:text-gold transition-colors">Request Quote</Link></li>
+              <li><Link to="/policies" className="hover:text-gold transition-colors">Trade Policies</Link></li>
             </ul>
           </div>
 
@@ -85,6 +86,7 @@ export function Footer() {
           <p>© {SITE.year} {SITE.name}. All rights reserved.</p>
           <div className="flex gap-5">
             <Link to="/privacy" className="hover:text-gold">Privacy Policy</Link>
+            <Link to="/policies" className="hover:text-gold">Trade Policies</Link>
             <Link to="/terms" className="hover:text-gold">Terms & Conditions</Link>
           </div>
         </div>
