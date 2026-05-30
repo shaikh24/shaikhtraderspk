@@ -14,6 +14,7 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as MarketsRouteImport } from './routes/markets'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -45,6 +46,11 @@ const ProductsRoute = ProductsRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesRoute = PoliciesRouteImport.update({
+  id: '/policies',
+  path: '/policies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketsRoute = MarketsRouteImport.update({
@@ -90,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/markets': typeof MarketsRoute
+  '/policies': typeof PoliciesRoute
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRouteWithChildren
   '/quote': typeof QuoteRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/markets': typeof MarketsRoute
+  '/policies': typeof PoliciesRoute
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRouteWithChildren
   '/quote': typeof QuoteRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/markets': typeof MarketsRoute
+  '/policies': typeof PoliciesRoute
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRouteWithChildren
   '/quote': typeof QuoteRoute
@@ -135,6 +144,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/gallery'
     | '/markets'
+    | '/policies'
     | '/privacy'
     | '/products'
     | '/quote'
@@ -149,6 +159,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/gallery'
     | '/markets'
+    | '/policies'
     | '/privacy'
     | '/products'
     | '/quote'
@@ -163,6 +174,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/gallery'
     | '/markets'
+    | '/policies'
     | '/privacy'
     | '/products'
     | '/quote'
@@ -178,6 +190,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   GalleryRoute: typeof GalleryRoute
   MarketsRoute: typeof MarketsRoute
+  PoliciesRoute: typeof PoliciesRoute
   PrivacyRoute: typeof PrivacyRoute
   ProductsRoute: typeof ProductsRouteWithChildren
   QuoteRoute: typeof QuoteRoute
@@ -220,6 +233,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies': {
+      id: '/policies'
+      path: '/policies'
+      fullPath: '/policies'
+      preLoaderRoute: typeof PoliciesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/markets': {
@@ -293,6 +313,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   GalleryRoute: GalleryRoute,
   MarketsRoute: MarketsRoute,
+  PoliciesRoute: PoliciesRoute,
   PrivacyRoute: PrivacyRoute,
   ProductsRoute: ProductsRouteWithChildren,
   QuoteRoute: QuoteRoute,
